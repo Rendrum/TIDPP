@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+	<testsuite name="poll.tests.TestStringMethods-20220112220948" tests="2" file="poll/tests.py" time="0.005" timestamp="2022-01-12T22:09:48" failures="0" errors="0" skipped="0">
+		<testcase classname="poll.tests.TestStringMethods" name="test_isupper" time="0.005" timestamp="2022-01-12T22:09:48" file="poll\tests.py" line="21"/>
+		<testcase classname="poll.tests.TestStringMethods" name="test_upper" time="0.000" timestamp="2022-01-12T22:09:48" file="poll\tests.py" line="18"/>
+	</testsuite>
+	<testsuite name="poll.tests.TestSum-20220112220948" tests="2" file="poll/tests.py" time="0.001" timestamp="2022-01-12T22:09:48" failures="0" errors="0" skipped="0">
+		<testcase classname="poll.tests.TestSum" name="test_sum" time="0.001" timestamp="2022-01-12T22:09:48" file="poll\tests.py" line="10"/>
+		<testcase classname="poll.tests.TestSum" name="test_sum_tuple" time="0.000" timestamp="2022-01-12T22:09:48" file="poll\tests.py" line="13"/>
+	</testsuite>
+</testsuites>
