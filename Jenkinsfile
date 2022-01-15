@@ -51,7 +51,7 @@ pipeline {
          stage("Testing backend") {
         
             steps {
-                bat 'C:\\Users\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
+                bat 'C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
                 junit '**/test-reports/unittest/*.xml'
             }
 
