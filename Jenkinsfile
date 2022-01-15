@@ -35,12 +35,12 @@ pipeline {
             steps {
                 echo "Build number ${BUILD_NUMBER} and ${BUILD_TAG}"
 
-                bat 'C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m venv "${BUILD_TAG}" && \
+                bat 'C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m venv "${BUILD_TAG}" && \
                 ${BUILD_TAG}\\Scripts\\activate.bat && \
-                C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install --upgrade pip && \
-                C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install -r requirements.txt && \
-                C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py makemigrations && \
-                C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py migrate && \
+                C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install --upgrade pip && \
+                C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install -r requirements.txt && \
+                C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py makemigrations && \
+                C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py migrate && \
                 ${BUILD_TAG}\\Scripts\\deactivate.bat'
             }
 
@@ -51,7 +51,7 @@ pipeline {
          stage("Testing backend") {
         
             steps {
-                bat 'C:\\Users\\Daniel\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
+                bat 'C:\\Users\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
                 junit '**/test-reports/unittest/*.xml'
             }
 
@@ -94,12 +94,12 @@ pipeline {
             echo "Sending emails"
             emailext body: '$PROJECT_NAME',
                      subject: '$PROJECT_NAME',
-                     to: 'gredet200@gmail.com'
+                     to: 'iuragutan2000@mail.ru'
                      
             echo "Send email job name: ${JOB_NAME}, build number: ${BUILD_NUMBER}, build url: ${BUILD_URL} "
             emailext ( body: "Jenkins! job name: ${JOB_NAME}, build number: ${BUILD_NUMBER}, build url: ${BUILD_URL}",
                         subject: 'Build',
-                        to: 'cevdar.daniel@isa.utm.md')
+                        to: 'gutan.iurii@isa.utm.md')
         }
 
          unstable {
