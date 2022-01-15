@@ -89,9 +89,10 @@ pipeline {
                 }
             }
         }
-        /*
+     
         success {
             echo "Sending emails"
+               /*
             emailext body: '$PROJECT_NAME',
                      subject: '$PROJECT_NAME',
                      to: 'iuragutan2000@mail.ru'
