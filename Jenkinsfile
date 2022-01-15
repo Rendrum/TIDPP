@@ -101,8 +101,9 @@ pipeline {
             emailext ( body: "Jenkins! job name: ${JOB_NAME}, build number: ${BUILD_NUMBER}, build url: ${BUILD_URL}",
                         subject: 'Build',
                         to: 'gutan.iurii@isa.utm.md')
+                           */
         }
-        */
+     
          unstable {
               echo "The build is unstable. Try fix it"
          }
