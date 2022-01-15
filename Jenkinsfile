@@ -9,23 +9,21 @@ pipeline {
         cron('0 0-23/2 * * *')
     }
 
-     options {
-          buildDiscarder(logRotator(numToKeepStr: '10'))
-          timestamps()
-     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timestamps()
+    }
      
-     parameters {
+    parameters {
         booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: false, description: 'Clean workspace at the end.')
     }
 
-    
-
-     environment {
-         ON_SUCCESS_SEND_EMAIL = 'true'
-         ON_FAILURE_SEND_EMAIL = 'true'
-         DELETE_FOLDER_AFTER_STAGES = 'false'
-         DB_ENGINE    = 'sqlite3'
-     }
+    environment {
+        ON_SUCCESS_SEND_EMAIL = 'true'
+        ON_FAILURE_SEND_EMAIL = 'true'
+        DELETE_FOLDER_AFTER_STAGES = 'false'
+        DB_ENGINE    = 'sqlite3'
+    }
 
     stages() {
 
@@ -47,8 +45,7 @@ pipeline {
 
         }
 
-
-         stage("Testing backend") {
+        stage("Testing backend") {
         
             steps {
                 bat 'C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
@@ -64,7 +61,8 @@ pipeline {
             steps {
                 bat 'IF "%TESTING_FRONTEND%"=="true" echo "running frontend %TESTING_FRONTEND%"'
             }
-}
+        }
+
         stage("Delivery/Deployment") {
         
             steps {
@@ -72,12 +70,9 @@ pipeline {
             }
 
         }
-        
-}
-
     }
 
-       post {
+    post {
         always {
             echo "${BUILD_TAG}"
             script {
@@ -94,12 +89,12 @@ pipeline {
             echo "Sending emails"
             emailext body: '$PROJECT_NAME',
                      subject: '$PROJECT_NAME',
-                     to: 'iuragutan2000@mail.ru'
+                     to: 'testtidpp@gmail.com'
                      
             echo "Send email job name: ${JOB_NAME}, build number: ${BUILD_NUMBER}, build url: ${BUILD_URL} "
             emailext ( body: "Jenkins! job name: ${JOB_NAME}, build number: ${BUILD_NUMBER}, build url: ${BUILD_URL}",
                         subject: 'Build',
-                        to: 'gutan.iurii@isa.utm.md')
+                        to: 'testtidpp@gmail.com')
                            
         }
      
@@ -110,7 +105,5 @@ pipeline {
           failure {
              echo "Something happened"
           }
-
-      }
-  //  }
-
+    }
+}
