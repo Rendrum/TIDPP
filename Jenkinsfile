@@ -89,7 +89,7 @@ pipeline {
                 }
             }
         }
-        
+        /*
         success {
             echo "Sending emails"
             emailext body: '$PROJECT_NAME',
@@ -101,7 +101,7 @@ pipeline {
                         subject: 'Build',
                         to: 'gutan.iurii@isa.utm.md')
         }
-
+        */
          unstable {
               echo "The build is unstable. Try fix it"
          }
