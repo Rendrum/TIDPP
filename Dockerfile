@@ -1,14 +1,14 @@
-FROM python:alpine3.14
+from python:alpine3.14
 
-WORKDIR /app
+workdir /app
 
-COPY requirements.txt requirements.txt
+copy requirements.txt requirements.txt
 
-RUN pip3 install -r requirements.txt
+run pip3 install -r requirements.txt
 
-COPY . .
+copy . .
 
-EXPOSE 8000
+expose 8000
 
 
-CMD ["python","manage.py", "runserver", "0.0.0.0:8000"]
+cmd ["python", "manage.py", "runserver", "0.0.0.0:8000"]
