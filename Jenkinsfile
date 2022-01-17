@@ -73,10 +73,10 @@ pipeline {
         stage("Continuous Delivery") {
       steps {
         script {
-          dockerImage = docker.build("rendrum/tidpp:latest")
+          dockerimage = docker.build("rendrum/tidpp:latest")
         
           docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-jenkins') {
-            dockerImage.push()
+            dockerimage.push()
           }
         }
       }
