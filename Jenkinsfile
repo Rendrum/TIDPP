@@ -69,7 +69,7 @@ pipeline {
         stage("Continuous Delivery") {
       steps {
         script {
-          dockerImage = docker.build("rendrum/tidpp:latest")
+          dockerImage = docker.build("vicalmic/django-app:latest")
         
           docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-jenkins') {
             dockerImage.push()
