@@ -7,10 +7,12 @@ pipeline {
     
     triggers{
         cron('0 0-23/2 * * *')
+        //minuta 0 la fiecare 2 ore de la 0 la 23
     }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
+        //numarul de build loguri 
         timestamps()
     }
      
@@ -50,6 +52,7 @@ pipeline {
             steps {
                 bat 'C:\\Users\\Scooby\\AppData\\Local\\Programs\\Python\\Python310\\python.exe manage.py test'
                 junit '**/test-reports/unittest/*.xml'
+                //cadru de testare pentru Java 
             }
 
         }
@@ -63,13 +66,30 @@ pipeline {
             }
         }
 
-        stage("Delivery/Deployment") {
+        stage("Continuous Delivery") {
+      steps {
+        script {
+          dockerImage = docker.build("rendrum/tidpp:latest")
         
-            steps {
-                echo "Deployment stage"
-            }
-
+          docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-jenkins') {
+            dockerImage.push()
+          }
         }
+      }
+    }
+
+    stage("Continuous Deployment") {
+      steps {
+        sh 'docker compose -f docker-compose.yml --env-file ./.env up --detach --force-recreate'
+      }
+    }
+
+    stage("DEPLOY") {
+      steps {
+        echo "Deployment stage"
+      }
+    }
+  }
     }
 
     post {
