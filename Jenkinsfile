@@ -17,14 +17,15 @@ pipeline {
     }
      
     parameters {
-        booleanParam(name: 'CLEAN_WORKSPACE', defaultValue: false, description: 'Clean workspace at the end.')
+        booleanParam(name: "CLEAN_WORKSPACE", defaultValue: true, description: "Clean workspace at the end.")
+        booleanParam(name: "TESTING_FRONTEND", defaultValue: false, description: "Check this option if you would like to test the frontend.")
     }
 
     environment {
-        ON_SUCCESS_SEND_EMAIL = 'true'
-        ON_FAILURE_SEND_EMAIL = 'true'
-        DELETE_FOLDER_AFTER_STAGES = 'false'
         DB_ENGINE    = 'sqlite3'
+        ON_SUCCESS_SEND_EMAIL = 'True'
+        ON_FAILURE_SEND_EMAIL = 'True'
+        DELETE_FOLDER_AFTER_STAGES = 'False'
     }
 
     stages() {
@@ -57,19 +58,22 @@ pipeline {
 
         }
         
-        stage("Testing frontend") {
-            environment { 
-                TESTING_FRONTEND=false
+            stage("TEST_FRONTEND") {
+        when {
+            expression {
+            return params.TESTING_FRONTEND;
             }
-            steps {
-                bat 'IF "%TESTING_FRONTEND%"=="true" echo "running frontend %TESTING_FRONTEND%"'
+        }
+
+        steps {
+            echo "${params.TESTING_FRONTEND}"
             }
         }
 
         stage("Continuous Delivery") {
       steps {
         script {
-          dockerImage = docker.build("vicalmic/django-app:latest")
+          dockerImage = docker.build("rendrum/tidpp:latest")
         
           docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-jenkins') {
             dockerImage.push()
