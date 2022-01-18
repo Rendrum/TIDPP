@@ -84,7 +84,7 @@ pipeline {
 
     stage("Continuous Deployment") {
       steps {
-        sh 'docker compose -f docker-compose.yml --env-file ./.env up --detach --force-recreate'
+        bat 'docker compose -f docker-compose.yml --env-file ./.env up --detach --force-recreate'
       }
     }
 
